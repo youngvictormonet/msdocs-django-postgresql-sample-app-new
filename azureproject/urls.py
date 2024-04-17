@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from app import forms, views
+from restaurant_review import forms, views
 
-from app.views import (
+from restaurant_review.views import (
     UsersHTMxTableView
 )
 
