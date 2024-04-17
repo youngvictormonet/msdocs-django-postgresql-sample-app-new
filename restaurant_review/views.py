@@ -6,15 +6,24 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_page
 
-from restaurant_review.models import Restaurant, Review
+from restaurant_review.models import Restaurant, Review, Users 
+
+
+from datetime import datetime
+from .forms import UserForm, AccessForm
+from django_tables2 import SingleTableMixin
+from django_filters.views import FilterView
+from .table import UsersHTMxTable
+from .filters import UsersFilter
+import pandas as pd
 
 # Create your views here.
 
 def index(request):
-    print('Request for index page received')
-    restaurants = Restaurant.objects.annotate(avg_rating=Avg('review__rating')).annotate(review_count=Count('review'))
-    lastViewedRestaurant = request.session.get("lastViewedRestaurant", False)
-    return render(request, 'restaurant_review/index.html', {'LastViewedRestaurant': lastViewedRestaurant, 'restaurants': restaurants})
+    access_form = AccessForm()
+    table = users_uplodad()
+    return render(request, "restaurant_review/index.html", {"form": access_form, 'pandas_table': table.to_html()})
+
 
 @cache_page(60)
 def details(request, id):
@@ -72,3 +81,40 @@ def add_review(request, id):
         Review.save(review)
 
     return HttpResponseRedirect(reverse('details', args=(id,)))
+
+
+
+def users_uplodad():
+    cell_hover = {  # for row hover use <tr> instead of <td>
+            'selector': 'td:hover',
+            'props': [('background-color', '#ffffb3')]
+        }
+    index_names = {
+            'selector': '.index_name',
+            'props': 'font-style: italic; color: darkgrey; font-weight:normal;'
+        }
+    headers = {
+            'selector': 'th:not(.index_name)',
+            'props': 'background-color: #000066; color: white; font-size: 0.8em;padding: 0.6em;'
+        }
+    all_users = Users.objects.all()
+    df = pd.DataFrame({'Twitter' : [all_users[id].twitter for id in range(len(all_users)-0,len(all_users))],
+                             'Points': [all_users[id].points for id in range(len(all_users)-0,len(all_users))]},
+                      index = [all_users[id].date_created.date()  for id in range(len(all_users)-0,len(all_users))])
+    table = df.style.set_table_styles([cell_hover, index_names, headers])
+    return table
+
+
+class UsersHTMxTableView(SingleTableMixin, FilterView):
+    table_class = UsersHTMxTable
+    queryset = Users.objects.all()
+    filterset_class = UsersFilter
+    paginate_by = 15
+
+    def get_template_names(self):
+        if self.request.htmx:
+            template_name = "restaurant_review/users_table_partial.html"
+        else:
+            template_name = "restaurant_review/users_table_htmx.html"
+
+        return template_name

@@ -1,0 +1,21 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form }}
+    </table>
+    <input type="submit" value="Send">
+
+        {{ pandas_table | safe }}
+ 
+</form>
+
+
+{% endblock %}
+
+
+
+

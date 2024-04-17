@@ -38,6 +38,12 @@
       <main class="container">    
         {% block content %}{% endblock %}
       </main>
+        <div class="container">
+            {% block main_content %}{% endblock %}
+        </div>
+        <div class="container">
+            {% block main_table %}{% endblock %}
+        </div>
       <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>      
 </body>
 </html>

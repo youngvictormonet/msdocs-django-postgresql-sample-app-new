@@ -21,3 +21,15 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.restaurant.name} ({self.review_date:%x})"
+
+class Users(models.Model):
+    twitter = models.CharField(max_length=250)
+    email = models.EmailField()
+    ordinals_address = models.CharField(max_length=250)
+    points = models.IntegerField()
+    ref_status = models.BooleanField()
+    date_created = models.DateTimeField()
+    date_updated = models.DateTimeField()
+    tweet_link = models.CharField(max_length=250)
+    wl = models.BooleanField()
+    fcfs = models.BooleanField()
