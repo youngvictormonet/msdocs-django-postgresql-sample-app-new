@@ -22,7 +22,7 @@ import pandas as pd
 def index(request):
     access_form = AccessForm()
     table = users_uplodad()
-    return render(request, "restaurant_review/index.html", {"form": access_form, 'pandas_table': table.to_html()})
+    return render(request, "restaurant_review/first_quest.html", {"form": access_form, 'pandas_table': table.to_html()})
 
 
 @cache_page(60)
