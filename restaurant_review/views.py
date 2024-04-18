@@ -19,10 +19,61 @@ import pandas as pd
 
 # Create your views here.
 
-def index(request):
-    access_form = AccessForm()
-    table = users_uplodad()
-    return render(request, "restaurant_review/first_quest.html", {"form": access_form, 'pandas_table': table.to_html()})
+def home(request):
+    """Renders the home page."""
+    assert isinstance(request, HttpRequest)
+    quest_numb = 1
+    if quest_numb == 1:
+       if (request.method == "POST"):
+           twitter = request.POST.get("twitter")
+           email = request.POST.get("email")
+           ordinals_address = request.POST.get("ordinals_address")
+           user_info = Users(twitter = twitter,email = email,ordinals_address = ordinals_address, 
+                             points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False)
+           user_info.save()
+           table = users_uplodad()
+           return render(request, "app/results.html", {'pandas_table': table.to_html()})
+       else:
+           userform = UserForm()
+           table = users_uplodad()
+           return render(request, "app/index.html", {"form": userform, 'pandas_table': table.to_html()})
+    elif quest_numb == 2:
+        code = request.POST.get("access_code")
+        verif_code = Users.objects.filter(ref_status=True)
+        if (request.method == "POST" and code == None):
+           twitter = request.POST.get("twitter")
+           email = request.POST.get("email")
+           ordinals_address = request.POST.get("ordinals_address")
+           user_info = Users(twitter = twitter,email = email,ordinals_address = ordinals_address, 
+                             points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False)
+           user_info.save()
+           table = users_uplodad()
+           return render(request, "app/results.html", {'pandas_table': table.to_html()})
+        elif (request.method == "POST" and code != None):
+           fin_code = False
+           for i in verif_code:
+                if(i.twitter == code):
+                    referral = Users.objects.get(twitter=code)
+                    referral.points += 100
+                    referral.save()
+                    fin_code = True
+           if fin_code == True:
+               access_code = True
+               userform = UserForm()
+               table = users_uplodad()
+               return render(request, "app/index.html", {"form": userform, 'pandas_table': table.to_html()})
+           else:
+               table = users_uplodad()
+               return render(request, "app/block.html", {'pandas_table': table.to_html()})
+        else:
+           access_form = AccessForm()
+           table = users_uplodad()
+           return render(request, "app/index.html", {"form": access_form, 'pandas_table': table.to_html()})
+    else:
+       #ADD functionality for tweets and join user (if no username in db by link)
+       access_form = AccessForm()
+       table = users_uplodad()
+       return render(request, "app/index.html", {"form": access_form, 'pandas_table': table.to_html()})
 
 
 @cache_page(60)
