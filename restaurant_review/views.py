@@ -20,8 +20,6 @@ import pandas as pd
 # Create your views here.
 
 def home(request):
-    """Renders the home page."""
-    assert isinstance(request, HttpRequest)
     quest_numb = 1
     if quest_numb == 1:
        if (request.method == "POST"):
