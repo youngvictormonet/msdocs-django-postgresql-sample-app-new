@@ -33,4 +33,20 @@ class Migration(migrations.Migration):
                 ('restaurant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='restaurant_review.restaurant')),
             ],
         ),
+        migrations.CreateModel(
+            name='Users',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('twitter', models.CharField(max_length=100)),
+                ('email', models.EmailField()),
+                ('ordinals_address', models.CharField(max_length=100)),
+                ('points', models.IntegerField()),
+                ('ref_status', models.BooleanField()),
+                ('date_created', models.DateTimeField()),
+                ('date_updated', models.DateTimeField()),
+                ('tweet_link', models.CharField(max_length=100)),
+                ('wl', models.BooleanField()),
+                ('fcfs', models.BooleanField())
+            ],
+        ),
     ]
