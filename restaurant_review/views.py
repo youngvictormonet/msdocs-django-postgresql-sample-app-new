@@ -34,7 +34,7 @@ def index(request):
        else:
            userform = UserForm()
            table = users_uplodad()
-           return render(request, "restaurant_review/first_quest.html", {"form": userform, 'pandas_table': table.to_html()})
+           return render(request, "restaurant_review/first_quest.html", {"form": userform, 'pandas_table': table})
     elif quest_numb == 2:
         code = request.POST.get("access_code")
         verif_code = Users.objects.filter(ref_status=True)
@@ -151,7 +151,7 @@ def users_uplodad():
                              'Points': [all_users[id].points for id in range(len(all_users)-0,len(all_users))]},
                       index = [all_users[id].date_created.date()  for id in range(len(all_users)-0,len(all_users))])
     table = df.style.set_table_styles([cell_hover, index_names, headers])
-    return table
+    return all_users
 
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
