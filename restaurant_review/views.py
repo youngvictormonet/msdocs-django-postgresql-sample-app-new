@@ -30,11 +30,11 @@ def index(request):
                              points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False)
            user_info.save()
            table = users_uplodad()
-           return render(request, "app/results.html", {'pandas_table': table.to_html()})
+           return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
        else:
            userform = UserForm()
            table = users_uplodad()
-           return render(request, "app/first_quest.html", {"form": userform, 'pandas_table': table.to_html()})
+           return render(request, "restaurant_review/first_quest.html", {"form": userform, 'pandas_table': table.to_html()})
     elif quest_numb == 2:
         code = request.POST.get("access_code")
         verif_code = Users.objects.filter(ref_status=True)
@@ -46,7 +46,7 @@ def index(request):
                              points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False)
            user_info.save()
            table = users_uplodad()
-           return render(request, "app/results.html", {'pandas_table': table.to_html()})
+           return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
         elif (request.method == "POST" and code != None):
            fin_code = False
            for i in verif_code:
@@ -59,19 +59,19 @@ def index(request):
                access_code = True
                userform = UserForm()
                table = users_uplodad()
-               return render(request, "app/first_quest.html", {"form": userform, 'pandas_table': table.to_html()})
+               return render(request, "restaurant_review/first_quest.html", {"form": userform, 'pandas_table': table.to_html()})
            else:
                table = users_uplodad()
-               return render(request, "app/block.html", {'pandas_table': table.to_html()})
+               return render(request, "restaurant_review/block.html", {'pandas_table': table.to_html()})
         else:
            access_form = AccessForm()
            table = users_uplodad()
-           return render(request, "app/first_quest.html", {"form": access_form, 'pandas_table': table.to_html()})
+           return render(request, "restaurant_review/first_quest.html", {"form": access_form, 'pandas_table': table.to_html()})
     else:
        #ADD functionality for tweets and join user (if no username in db by link)
        access_form = AccessForm()
        table = users_uplodad()
-       return render(request, "app/first_quest.html", {"form": access_form, 'pandas_table': table.to_html()})
+       return render(request, "restaurant_review/first_quest.html", {"form": access_form, 'pandas_table': table.to_html()})
 
 
 @cache_page(60)
