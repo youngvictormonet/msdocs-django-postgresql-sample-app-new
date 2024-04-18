@@ -34,7 +34,7 @@ def index(request):
        else:
            userform = UserForm()
            table = users_uplodad()
-           return render(request, "restaurant_review/first_quest.html", {"form": userform, 'pandas_table': table})
+           return render(request, "restaurant_review/first_quest.html", {"form": userform, 'pandas_table': table.to_html()})
     elif quest_numb == 2:
         code = request.POST.get("access_code")
         verif_code = Users.objects.filter(ref_status=True)
@@ -147,11 +147,11 @@ def users_uplodad():
             'props': 'background-color: #000066; color: white; font-size: 0.8em;padding: 0.6em;'
         }
     all_users = Users.objects.all()
-    df = pd.DataFrame({'Twitter' : [all_users[id].twitter for id in range(len(all_users)-0,len(all_users))],
-                             'Points': [all_users[id].points for id in range(len(all_users)-0,len(all_users))]},
-                      index = [all_users[id].date_created.date()  for id in range(len(all_users)-0,len(all_users))])
+    df = pd.DataFrame({'Twitter' : [all_users[id].twitter for id in range(len(all_users)-3,len(all_users))],
+                             'Points': [all_users[id].points for id in range(len(all_users)-3,len(all_users))]},
+                      index = [all_users[id].date_created.date()  for id in range(len(all_users)-3,len(all_users))])
     table = df.style.set_table_styles([cell_hover, index_names, headers])
-    return [all_users[id].twitter for id in range(len(all_users)-0,len(all_users))]
+    return table
 
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
