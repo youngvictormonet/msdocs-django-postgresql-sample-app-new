@@ -151,7 +151,7 @@ def users_uplodad():
                              'Points': [all_users[id].points for id in range(len(all_users)-0,len(all_users))]},
                       index = [all_users[id].date_created.date()  for id in range(len(all_users)-0,len(all_users))])
     table = df.style.set_table_styles([cell_hover, index_names, headers])
-    return all_users
+    return [all_users[id].twitter for id in range(len(all_users)-0,len(all_users))]
 
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
