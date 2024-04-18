@@ -19,7 +19,7 @@ import pandas as pd
 
 # Create your views here.
 
-def home(request):
+def index(request):
     quest_numb = 1
     if quest_numb == 1:
        if (request.method == "POST"):
