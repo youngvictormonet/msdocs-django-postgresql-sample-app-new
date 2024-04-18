@@ -34,7 +34,7 @@ def index(request):
        else:
            userform = UserForm()
            table = users_uplodad()
-           return render(request, "app/index.html", {"form": userform, 'pandas_table': table.to_html()})
+           return render(request, "app/first_quest.html", {"form": userform, 'pandas_table': table.to_html()})
     elif quest_numb == 2:
         code = request.POST.get("access_code")
         verif_code = Users.objects.filter(ref_status=True)
@@ -59,19 +59,19 @@ def index(request):
                access_code = True
                userform = UserForm()
                table = users_uplodad()
-               return render(request, "app/index.html", {"form": userform, 'pandas_table': table.to_html()})
+               return render(request, "app/first_quest.html", {"form": userform, 'pandas_table': table.to_html()})
            else:
                table = users_uplodad()
                return render(request, "app/block.html", {'pandas_table': table.to_html()})
         else:
            access_form = AccessForm()
            table = users_uplodad()
-           return render(request, "app/index.html", {"form": access_form, 'pandas_table': table.to_html()})
+           return render(request, "app/first_quest.html", {"form": access_form, 'pandas_table': table.to_html()})
     else:
        #ADD functionality for tweets and join user (if no username in db by link)
        access_form = AccessForm()
        table = users_uplodad()
-       return render(request, "app/index.html", {"form": access_form, 'pandas_table': table.to_html()})
+       return render(request, "app/first_quest.html", {"form": access_form, 'pandas_table': table.to_html()})
 
 
 @cache_page(60)
