@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-from app import forms, views
+from restaurant_review import forms, views
 
 from app.views import (
     UsersHTMxTableView
