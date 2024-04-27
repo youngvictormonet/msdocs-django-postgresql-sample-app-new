@@ -2,13 +2,9 @@ from django.urls import path
 
 from . import views
 
-from views import (
-    UsersHTMxTableView
-)
-
 urlpatterns = [
     path('', views.home, name='home'),
-    path("htmx/", UsersHTMxTableView.as_view(), name="users_htmx"),
+    path("htmx/", views.UsersHTMxTableView.as_view(), name="users_htmx"),
     path('<int:id>/', views.details, name='details'),
     path('create', views.create_restaurant, name='create_restaurant'),
     path('add', views.add_restaurant, name='add_restaurant'),
