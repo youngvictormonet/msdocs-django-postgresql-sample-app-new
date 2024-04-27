@@ -46,7 +46,8 @@ class Migration(migrations.Migration):
                 ('date_updated', models.DateTimeField()),
                 ('tweet_link', models.CharField(max_length=100)),
                 ('wl', models.BooleanField()),
-                ('fcfs', models.BooleanField())
+                ('fcfs', models.BooleanField()),
+                ('invitation_code', models.CharField(max_length=100)),
             ],
         ),
     ]
