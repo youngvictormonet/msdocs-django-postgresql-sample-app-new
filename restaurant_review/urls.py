@@ -2,6 +2,12 @@ from django.urls import path
 
 from . import views
 
+from app import forms, views
+
+from app.views import (
+    UsersHTMxTableView
+)
+
 urlpatterns = [
     path('', views.home, name='home'),
     path("htmx/", UsersHTMxTableView.as_view(), name="users_htmx"),
