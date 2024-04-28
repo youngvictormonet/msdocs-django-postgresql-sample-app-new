@@ -25,9 +25,9 @@ class UsersHTMxTableView(SingleTableMixin, FilterView):
 
     def get_template_names(self):
         if self.request.htmx:
-            template_name = "app/users_table_partial.html"
+            template_name = "restaurant_review/users_table_partial.html"
         else:
-            template_name = "app/users_table_htmx.html"
+            template_name = "restaurant_review/users_table_htmx.html"
 
         return template_name
 
@@ -45,11 +45,11 @@ def home(request):
                              points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False)
            user_info.save()
            table = users_uplodad()
-           return render(request, "app/results.html", {'pandas_table': table.to_html()})
+           return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
        else:
            userform = UserForm()
            table = users_uplodad()
-           return render(request, "app/index.html", {"form": userform, 'pandas_table': table.to_html()})
+           return render(request, "restaurant_review/index.html", {"form": userform, 'pandas_table': table.to_html()})
     elif quest_numb == 2:
         code = request.POST.get("access_code")
         verif_code = Users.objects.filter(ref_status=True)
@@ -61,7 +61,7 @@ def home(request):
                              points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False)
            user_info.save()
            table = users_uplodad()
-           return render(request, "app/results.html", {'pandas_table': table.to_html()})
+           return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
         elif (request.method == "POST" and code != None):
            fin_code = False
            for i in verif_code:
@@ -74,19 +74,19 @@ def home(request):
                access_code = True
                userform = UserForm()
                table = users_uplodad()
-               return render(request, "app/index.html", {"form": userform, 'pandas_table': table.to_html()})
+               return render(request, "restaurant_review/index.html", {"form": userform, 'pandas_table': table.to_html()})
            else:
                table = users_uplodad()
-               return render(request, "app/block.html", {'pandas_table': table.to_html()})
+               return render(request, "restaurant_review/block.html", {'pandas_table': table.to_html()})
         else:
            access_form = AccessForm()
            table = users_uplodad()
-           return render(request, "app/index.html", {"form": access_form, 'pandas_table': table.to_html()})
+           return render(request, "restaurant_review/index.html", {"form": access_form, 'pandas_table': table.to_html()})
     else:
        #ADD functionality for tweets and join user (if no username in db by link)
        access_form = AccessForm()
        table = users_uplodad()
-       return render(request, "app/index.html", {"form": access_form, 'pandas_table': table.to_html()})
+       return render(request, "restaurant_review/index.html", {"form": access_form, 'pandas_table': table.to_html()})
 
 
 def users_uplodad():
@@ -115,7 +115,7 @@ def contact(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/contact.html',
+        'restaurant_review/contact.html',
         {
             'title':'Contact',
             'message':'Your contact page.',
@@ -128,7 +128,7 @@ def about(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/about.html',
+        'restaurant_review/about.html',
         {
             'title':'About',
             'message':'Your application description page.',
