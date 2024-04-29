@@ -3,189 +3,41 @@
 <html lang="en">
 <head>
     {% block head %}
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}Django HTMx Fun{% endblock title %}</title>
-    <link href="https://fonts.cdnfonts.com/css/network-vampires" rel="stylesheet">
-         <link href="https://fonts.googleapis.com/css2?family=Diplomata+SC&display=swap&text=0123456789" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.6.1/htmx.min.js" integrity="sha512-aUGLiEPPd4KYAKmXba1ZeH3JCtPEo3F8Ay1C7sRpSnOcfsczlP1j14jo3abBaMqJu9QC4pbh8TyKy9ekZ6j7Pw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-  <style>
-
-      body {
-                display: flex;
-                justify-content: center;
-                align-items: start;
-                height: 100vh;
-                margin: 0;
-                background-color: white;
-                font-family: "Diplomata SC","NETWORK VAMPIRES", sans-serif;
-            }
-
-
-            form {
-                width: 400px;
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 0;
-                box-shadow: 0 0 10px
-                    rgba(0, 0, 0, 0.1);
-            }
-
-            fieldset {
-                border: 1px solid black;
-                padding: 10px;
-                margin: 0;
-            }
-
-            legend {
-                font-weight: bold;
-                margin-bottom: 10px;
-            }
-
-            label {
-                display: block;
-                margin-bottom: 5px;
-            }
-
-            input[type="text"],
-            input[type="email"],
-            input[type="password"],
-            textarea,
-            input[type="date"] {
-                width: calc(100% - 20px);
-                padding: 8px;
-                margin-bottom: 10px;
-                box-sizing: border-box;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-
-            input[type="submit"] {
-                padding: 10px 20px;
-
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            
-      
-
-            .form_container { grid-area: form_container; }
-
-            .table_container { grid-area: table_container; }
-
-      .index_container {
-                display: grid;
-      grid-template: 'form_container table_container';
-      grid-gap: 10px;
-      padding: 50px;
-      padding-top: 0;
-      padding-bottom: 10px;
-      }
-
-          .index_container > div {
-              position: relative;
-      text-align: center;
-      padding: 20px 0;
-          margin: 0 auto;
-    }
-
-      @media screen and (max-width: 480px) {
-          .index_container {
-              display: grid;
-              grid-template: 'form_container' 'table_container';
-              grid-gap: 10px;
-              padding: 10px;
-                  margin: 0 auto;
-          }
-      }
-
-
-    .item1 { grid-area: header; }
-    .item2 { grid-area: menu; }
-    .item3 { grid-area: main; }
-    .item4 { grid-area: right; }
-    .item5 { grid-area: footer; }
-
-    .grid-container {
-      display: grid;
-      grid-template:
-        'header header header header'
-        'main main right right'
-        'footer footer footer footer';
-      grid-gap: 10px;
-      padding: 10px;
-    }
-
-    .grid-container > div {
-      text-align: center;
-      padding: 5px 0;
-      font-size: 0.8rem;
-
-    }
-
-      .records {
-          font-size: 25px;
-           padding-top: 25px; 
-           padding-left: inherit; 
-           padding-right: inherit; 
-           left: 0; right: 0; 
-           position: absolute; 
-           font-size: 1em;
-      }
-
-    </style>
+        <title>Django web app with PostgreSQL in Azure - {% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+        <link rel="icon"href="{% static 'favicon.ico' %}">
     {% endblock %}
 </head>
-
 <body>
-    <div id="wrapper">
-        <div class="grid-container">
-          <div class="item1"><img style="width:40%" src="../../static/app/images/website_logo_sec.png" /></div>
-        </div>
-
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
         <div class="container">
-            {% block content %}{% endblock %}
+          <a class="navbar-brand" href="/">
+            <img src="{% static 'images/azure-icon.svg' %}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            Azure Restaurant Review
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">                
+            <ul class="navbar-nav mb-2 mb-md-0 ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-bs-toggle="dropdown" aria-expanded="true">Azure Docs</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown07XL" data-bs-popper="none">
+                        <li><a class="dropdown-item" target="_blank" href="https://docs.microsoft.com/azure">Azure Docs Home</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="#">Python Web App + PostgreSQL Database Tutorial</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://azure.microsoft.com/develop/python/">Python on Azure</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://docs.microsoft.com/azure/developer/python">Python on Azure Developer Center</a></li>
+                    </ul>
+                </li>
+            </ul>
+          </div>
         </div>
-        <div class="container">
-            {% block main_table %}{% endblock %}
-        </div>
+      </nav>
 
-        <div class="grid-container" style="padding-top: 3px;">
-          <div class="item1">
-            <a href="index.html">home</a>
-            <a> | </a>
-            <a href="/htmx">records</a>
-          </div>
-            <div class="item3">
-            <a href="index.html">satoshi nakamoto</a>
-            <a> | </a>
-            <a href="/htmx">bitcoin documentation</a>
-            <a> | </a>
-            <a href="index.html">how to buy a bitcoin</a>
-            <a> | </a>
-            <a href="/htmx">p2p foundation</a>
-            <a> | </a>
-            <a href="/htmx">bitcoin twitter</a>
-            <a> | </a>
-            <a href="/htmx">rare satoshi</a>
-            <a> | </a>
-            <a href="/htmx">ordinals</a>
-            <a> | </a>
-            <a href="/htmx">satordinals</a>
-          </div>
-           <div class="item5">
-            <a href="index.html">twitter</a>
-            <a> | </a>
-            <a href="/htmx">email</a>
-            <a> | </a>
-            <a href="/htmx">discord</a>
-          </div>
-        </div>
-        <h4 style="text-align:center; margin: 0 auto; padding-top: 20px; font-size: 0.8rem;">All rights reserved. - © 2024 </h4>
-    </div>
+      <main class="container">    
+        {% block content %}{% endblock %}
+      </main>
+      <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>      
 </body>
 </html>
