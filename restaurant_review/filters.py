@@ -1,6 +1,6 @@
 from django.db.models import Q
 import django_filters
-from .models import Users
+from restaurant_review.models import Users
 
 class UsersFilter(django_filters.FilterSet):
     query = django_filters.CharFilter(method='universal_search', label="")
