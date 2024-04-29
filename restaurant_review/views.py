@@ -34,7 +34,6 @@ class UsersHTMxTableView(SingleTableMixin, FilterView):
 
 def home(request):
     """Renders the home page."""
-    assert isinstance(request, HttpRequest)
     quest_numb = 2
     if quest_numb == 1:
        if (request.method == "POST"):
