@@ -1,9 +1,4 @@
 {% extends "restaurant_review/base.html" %}
-{% load restaurant_extras %}
-{% block head %}
-    {{ block.super }}
-    
-{% endblock %}
 {% block content %}
 <div class="index_container">
     <div class="form_container">
@@ -22,9 +17,9 @@
     </form>
     </div>
     <div class="table_container">
-    {{ pandas_table | safe }}
+        {{ pandas_table | safe }}
         <a style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"; href=""></a>
-        <a href="/htmx" class="records">See all records / WL checker</a>
+        <a href="" class="records">See all records / WL checker</a>
     </div>
 </div>
 <hr style="width:100%">
