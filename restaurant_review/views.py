@@ -6,15 +6,47 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_page
 
-from restaurant_review.models import Restaurant, Review
+from restaurant_review.models import Restaurant, Review, Users
+from restaurant_review.forms import UserForm, AccessForm
+
+import pandas as pd
 
 # Create your views here.
 
 def index(request):
-    print('Request for index page received')
-    restaurants = Restaurant.objects.annotate(avg_rating=Avg('review__rating')).annotate(review_count=Count('review'))
-    lastViewedRestaurant = request.session.get("lastViewedRestaurant", False)
-    return render(request, 'restaurant_review/index.html', {'LastViewedRestaurant': lastViewedRestaurant, 'restaurants': restaurants})
+       if (request.method == "POST"):
+           twitter = request.POST.get("twitter")
+           email = request.POST.get("email")
+           ordinals_address = request.POST.get("ordinals_address")
+           user_info = Users(twitter = twitter,email = email,ordinals_address = ordinals_address, 
+                             points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False, invitation_code = 'Public')
+           user_info.save()
+           table = users_uplodad()
+           return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
+       else:
+           userform = UserForm()
+           table = users_uplodad()
+           return render(request, "restaurant_review/index.html", {"form": userform, 'pandas_table': table.to_html()})
+           
+def users_uplodad():
+    cell_hover = {  # for row hover use <tr> instead of <td>
+            'selector': 'td:hover',
+            'props': [('background-color', '#ffffb3')]
+        }
+    index_names = {
+            'selector': '.index_name',
+            'props': 'font-style: italic; color: darkgrey; font-weight:normal;'
+        }
+    headers = {
+            'selector': 'th:not(.index_name)',
+            'props': 'background-color: white; color: black; font-size: 1em; padding: 0.3em; padding-right: 2em; padding-left: 2em; border-width:5px; border-style: dotted; border-color:black; font-weight: 500; '
+        }
+    all_users = Users.objects.all()
+    df = pd.DataFrame({'Twitter' : [all_users[id].twitter for id in range(len(all_users)-3,len(all_users))],
+                             'Points': [all_users[id].points for id in range(len(all_users)-3,len(all_users))]},
+                      index = [all_users[id].date_created.strftime("%H:%M:%S")  for id in range(len(all_users)-3,len(all_users))])
+    table = df.style.set_table_styles([cell_hover, index_names, headers])
+    return table
 
 @cache_page(60)
 def details(request, id):
