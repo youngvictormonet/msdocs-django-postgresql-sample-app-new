@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_page
+from datetime import datetime
 
 from restaurant_review.models import Restaurant, Review, Users
 from restaurant_review.forms import UserForm, AccessForm
