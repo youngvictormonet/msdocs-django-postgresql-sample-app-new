@@ -111,7 +111,6 @@ def users_uplodad():
 
 def contact(request):
     """Renders the contact page."""
-    assert isinstance(request, HttpRequest)
     return render(
         request,
         'restaurant_review/contact.html',
@@ -124,7 +123,6 @@ def contact(request):
 
 def about(request):
     """Renders the about page."""
-    assert isinstance(request, HttpRequest)
     return render(
         request,
         'restaurant_review/about.html',
