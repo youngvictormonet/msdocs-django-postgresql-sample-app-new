@@ -5,15 +5,15 @@ Definition of views.
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpRequest
-from .models import Users 
-from .forms import UserForm, AccessForm
+from restaurant_review.models import Users 
+from restaurant_review.forms import UserForm, AccessForm
 from django.http import HttpResponse
 
 from django_tables2 import SingleTableMixin
 from django_filters.views import FilterView
 
-from .table import UsersHTMxTable
-from .filters import UsersFilter
+from restaurant_review.table import UsersHTMxTable
+from restaurant_review.filters import UsersFilter
 
 import pandas as pd
 
