@@ -56,8 +56,12 @@ def users_uplodad():
     return table
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
-    def get_template_names():
+    def get_template_names(self):
+        if self.request.htmx:
             template_name = "app/users_table_htmx.html"
+        else:
+            template_name = "app/users_table_htmx.html"
+
         return template_name
 
 @cache_page(60)
