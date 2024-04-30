@@ -58,7 +58,7 @@ def users_uplodad():
 class UsersHTMxTableView(SingleTableMixin, FilterView):
     def get_template_names():
         some = True
-        if sonme == True:
+        if some == True:
             template_name = "app/users_table_htmx.html"
         else:
             template_name = "app/users_table_htmx.html"
