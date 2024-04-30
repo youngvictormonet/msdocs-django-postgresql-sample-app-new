@@ -57,7 +57,8 @@ def users_uplodad():
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
     def get_template_names():
-           return "restaurant_review/users_table_htmx.html"
+           template_name = "app/users_table_htmx.html"
+                  return template_name
 
 @cache_page(60)
 def details(request, id):
