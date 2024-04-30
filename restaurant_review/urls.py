@@ -1,6 +1,10 @@
 from django.urls import path
 
-from . import views
+from . import views, forms
+
+from .views import (
+    UsersHTMxTableView
+)
 
 urlpatterns = [
     path('', views.index, name='index'),
