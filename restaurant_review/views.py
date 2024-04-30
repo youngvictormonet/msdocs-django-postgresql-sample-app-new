@@ -63,7 +63,7 @@ class UsersHTMxTableView(SingleTableMixin, FilterView):
 
     def get_template_names(self):
         if self.request.htmx:
-            template_name = "restaurant_review/users_table_partial.html"
+            template_name = "restaurant_review/users_table_htmx.html"
         else:
             template_name = "restaurant_review/users_table_htmx.html"
 
