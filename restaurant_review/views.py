@@ -57,7 +57,7 @@ def users_uplodad():
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
     table_class = UsersHTMxTable
-    queryset = Users.objects.all()
+    queryset = Users.objects.all().order_by('id')
     filterset_class = UsersFilter
     paginate_by = 15
 
