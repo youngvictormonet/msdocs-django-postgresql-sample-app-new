@@ -56,6 +56,11 @@ def users_uplodad():
     return table
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
+    table_class = UsersHTMxTable
+    queryset = Users.objects.all().order_by('points')
+    filterset_class = UsersFilter
+    paginate_by = 15
+
     def get_template_names():
         some = True
         if some == True:
