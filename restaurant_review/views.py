@@ -59,9 +59,9 @@ class UsersHTMxTableView(SingleTableMixin, FilterView):
     def get_template_names():
         some = True
         if some == True:
-            template_name = "app/users_table_htmx.html"
+            template_name = "restaurant_review/users_table_htmx.html"
         else:
-            template_name = "app/users_table_htmx.html"
+            template_name = "restaurant_review/users_table_htmx.html"
 
         return template_name
 
