@@ -1,18 +1,2 @@
 {% extends "restaurant_review/base.html" %}
-{% load render_table from django_tables2 %}
-{% load crispy_forms_tags %}
 
-{% block main_table %}
-        {# Search form #}
-        <form hx-get="{% url 'users_htmx' %}" hx-target="div.table-container" hx-swap="outerHTML" hx-indicator=".progress" class="form-inline">
-            {% crispy filter.form %}
-        </form>
-
-        {# Progress indicator #}
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-
-    {# The actual table #}
-    {% render_table table %}
-{% endblock %}
