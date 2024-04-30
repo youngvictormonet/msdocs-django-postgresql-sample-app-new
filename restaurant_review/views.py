@@ -12,6 +12,12 @@ from restaurant_review.forms import UserForm, AccessForm
 
 import pandas as pd
 
+from django_tables2 import SingleTableMixin
+from django_filters.views import FilterView
+
+from restaurant_review.table import UsersHTMxTable
+from restaurant_review.filters import UsersFilter
+
 # Create your views here.
 
 def index(request):
@@ -48,6 +54,20 @@ def users_uplodad():
                       index = [all_users[id].date_created.strftime("%H:%M:%S")  for id in range(len(all_users)-3,len(all_users))])
     table = df.style.set_table_styles([cell_hover, index_names, headers])
     return table
+
+class UsersHTMxTableView(SingleTableMixin, FilterView):
+    table_class = UsersHTMxTable
+    queryset = Users.objects.all()
+    filterset_class = UsersFilter
+    paginate_by = 15
+
+    def get_template_names(self):
+        if self.request.htmx:
+            template_name = "restaurant_review/users_table_partial.html"
+        else:
+            template_name = "restaurant_review/users_table_htmx.html"
+
+        return template_name
 
 @cache_page(60)
 def details(request, id):
