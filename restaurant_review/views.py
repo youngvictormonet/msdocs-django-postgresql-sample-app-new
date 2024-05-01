@@ -63,7 +63,7 @@ class UsersHTMxTableView(SingleTableMixin, FilterView):
     queryset = Users.objects.all().order_by('points')
     filterset_class = UsersFilter
     paginate_by = 15
-    template_name = "app/users_table_htmx.html"
+    template_name = "restaurant_review/users_table_htmx.html"
 
 class MyView(View):
     def get(self, request):
