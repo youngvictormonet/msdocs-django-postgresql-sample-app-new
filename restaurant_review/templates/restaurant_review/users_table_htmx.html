@@ -1,21 +1,13 @@
 {% extends "restaurant_review/base.html" %}
 
 {% load render_table from django_tables2 %}
-{% load i18n %}
-{% load crispy_forms_tags %}
+{% load bootstrap3 %}
 
-{% block main_table %}
-        {# Search form #}
-        <form hx-get="{% url 'users_htmx' %}" hx-target="div.table-container" hx-swap="outerHTML" hx-indicator=".progress" class="form-inline">
-            {% crispy filter.form %}
-        </form>
-
-        {# Progress indicator #}
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-
-    {# The actual table #}
-    {% render_table table %}
-{% endblock %}
+{% if filter %}
+    <form action="" method="get" class="form form-inline">
+        {% bootstrap_form filter.form layout='inline' %}
+        {% bootstrap_button 'filter' %}
+    </form>
+{% endif %}
+{% render_table table 'django_tables2/bootstrap.html' %}
 
