@@ -56,18 +56,8 @@ def users_uplodad():
     return table
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
-    table_class = UsersHTMxTable
-    queryset = Users.objects.all().order_by('points')
-    filterset_class = UsersFilter
-    paginate_by = 15
-
-    def get_template_names(self):
-        if self.request.htmx:
-            template_name = "restaurant_review/users_table_htmx.html"
-        else:
-            template_name = "restaurant_review/users_table_htmx.html"
-
-        return template_name
+    table = users_uplodad()
+    return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
 
 @cache_page(60)
 def details(request, id):
