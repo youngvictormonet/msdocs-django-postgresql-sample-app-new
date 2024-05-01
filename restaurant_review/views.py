@@ -61,9 +61,8 @@ class UsersHTMxTableView(SingleTableMixin, FilterView):
     filterset_class = UsersFilter
     paginate_by = 15
 
-    def get_template_names():
-        some = True
-        if some == True:
+    def get_template_names(self):
+        if self.request.htmx:
             template_name = "restaurant_review/users_table_htmx.html"
         else:
             template_name = "restaurant_review/users_table_htmx.html"
