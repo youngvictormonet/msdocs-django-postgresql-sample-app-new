@@ -59,12 +59,22 @@ def users_uplodad():
     return table
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
+    table_class = UsersHTMxTable
+    queryset = Users.objects.all().order_by('points')
+    filterset_class = UsersFilter
+    paginate_by = 15
+       
     def get(self, request):
-        return render(request, 'restaurant_review/create_restaurant.html')
+        return render(request, 'restaurant_review/users_table_htmx.html')
 
 class MyView(View):
+    table_class = UsersHTMxTable
+    queryset = Users.objects.all().order_by('points')
+    filterset_class = UsersFilter
+    paginate_by = 15
+       
     def get(self, request):
-        return render(request, 'restaurant_review/create_restaurant.html')
+        return render(request, 'restaurant_review/users_table_htmx.html')
 
 @cache_page(60)
 def details(request, id):
