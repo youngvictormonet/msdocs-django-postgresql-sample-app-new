@@ -18,6 +18,9 @@ from django_filters.views import FilterView
 from restaurant_review.table import UsersHTMxTable
 from restaurant_review.filters import UsersFilter
 
+from django.views import View
+from django.http import HttpResponse
+
 # Create your views here.
 
 def index(request):
@@ -59,6 +62,11 @@ class UsersHTMxTableView(SingleTableMixin, FilterView):
     def get(self, request):
            table = users_uplodad()
            return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
+
+class MyView(View):
+    def get(self, request):
+        # <view logic>
+        return HttpResponse("result")
 
 @cache_page(60)
 def details(request, id):
