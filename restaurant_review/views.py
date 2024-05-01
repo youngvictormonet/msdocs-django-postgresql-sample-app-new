@@ -56,8 +56,8 @@ def users_uplodad():
     return table
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
-    table = users_uplodad()
     def get(self, request):
+           table = users_uplodad()
            return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
 
 @cache_page(60)
