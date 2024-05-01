@@ -60,8 +60,7 @@ def users_uplodad():
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
     def get(self, request):
-           table = users_uplodad()
-           return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
+        return render(request, 'restaurant_review/create_restaurant.html')
 
 class MyView(View):
     def get(self, request):
