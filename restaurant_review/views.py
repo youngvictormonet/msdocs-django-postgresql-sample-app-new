@@ -65,8 +65,7 @@ class UsersHTMxTableView(SingleTableMixin, FilterView):
 
 class MyView(View):
     def get(self, request):
-        # <view logic>
-        return HttpResponse("result")
+        return render(request, 'restaurant_review/create_restaurant.html')
 
 @cache_page(60)
 def details(request, id):
