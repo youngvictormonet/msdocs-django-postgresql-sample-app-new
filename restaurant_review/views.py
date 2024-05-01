@@ -12,7 +12,7 @@ from restaurant_review.forms import UserForm, AccessForm
 
 import pandas as pd
 
-from django_tables2 import SingleTableMixin
+from django_tables2.views import SingleTableMixin
 from django_filters.views import FilterView
 
 from restaurant_review.table import UsersHTMxTable
@@ -63,18 +63,11 @@ class UsersHTMxTableView(SingleTableMixin, FilterView):
     queryset = Users.objects.all().order_by('points')
     filterset_class = UsersFilter
     paginate_by = 15
-       
-    def get(self, request):
-        return render(request, 'restaurant_review/users_table_htmx.html')
+    template_name = "app/users_table_htmx.html"
 
 class MyView(View):
-    table_class = UsersHTMxTable
-    queryset = Users.objects.all().order_by('points')
-    filterset_class = UsersFilter
-    paginate_by = 15
-       
     def get(self, request):
-        return render(request, 'restaurant_review/users_table_htmx.html')
+        return render(request, 'restaurant_review/create_restaurant.html')
 
 @cache_page(60)
 def details(request, id):
