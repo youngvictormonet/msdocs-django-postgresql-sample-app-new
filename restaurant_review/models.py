@@ -33,4 +33,3 @@ class Users(models.Model):
     tweet_link = models.CharField(max_length=250)
     wl = models.BooleanField()
     fcfs = models.BooleanField()
-    invitation_code = models.CharField(max_length=250)
