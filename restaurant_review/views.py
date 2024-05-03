@@ -64,7 +64,8 @@ class UsersHTMxTableView(SingleTableMixin, FilterView):
     except (OperationalError, ProgrammingError) as e:
        queryset = []
     #queryset = Users.objects.all().order_by('points')
-    #print(queryset)
+    print(queryset[1].twitter)
+    print(queryset[1].invitation_code)
     filterset_class = UsersFilter
     paginate_by = 15
     template_name = "restaurant_review/users_table_htmx.html"
