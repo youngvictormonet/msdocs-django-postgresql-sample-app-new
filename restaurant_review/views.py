@@ -58,6 +58,7 @@ def users_uplodad():
 class UsersHTMxTableView(SingleTableMixin, FilterView):
     table_class = UsersHTMxTable
     queryset = Users.objects.all().order_by('points')
+    print(queryset)
     filterset_class = UsersFilter
     paginate_by = 15
     template_name = "restaurant_review/users_table_htmx.html"
