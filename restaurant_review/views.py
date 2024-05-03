@@ -51,7 +51,7 @@ def users_uplodad():
             'props': 'background-color: white; color: black; font-size: 1em; padding: 0.3em; padding-right: 2em; padding-left: 2em; border-width:5px; border-style: dotted; border-color:black; font-weight: 500; '
         }
     all_users = Users.objects.all()
-    df = pd.DataFrame({'Twitter' : [all_users[id].twitter for id in range(len(all_users)-3,len(all_users))], 'Points': [all_users[id].points for id in range(len(all_users)-3,len(all_users))]}, index = [all_users[id].date_created.strftime("%H:%M:%S")  for id in range(len(all_users)-3,len(all_users))])
+    df = pd.DataFrame({'Twitter' : [all_users[id].twitter for id in range(len(all_users)-3,len(all_users))], 'Code': [all_users[id].invitation_code for id in range(len(all_users)-3,len(all_users))]}, index = [all_users[id].date_created.strftime("%H:%M:%S")  for id in range(len(all_users)-3,len(all_users))])
     table = df.style.set_table_styles([cell_hover, index_names, headers])
     return table
 
