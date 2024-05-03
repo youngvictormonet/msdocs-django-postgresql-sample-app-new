@@ -28,8 +28,7 @@ def index(request):
            twitter = request.POST.get("twitter")
            email = request.POST.get("email")
            ordinals_address = request.POST.get("ordinals_address")
-           #user_info = Users(twitter = twitter,email = email,ordinals_address = ordinals_address, 
-                             points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False)
+           #user_info = Users(twitter = twitter,email = email,ordinals_address = ordinals_address, points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False)
            #user_info.save()
            table = users_uplodad()
            return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
