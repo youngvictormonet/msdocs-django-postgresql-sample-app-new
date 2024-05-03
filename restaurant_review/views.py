@@ -25,6 +25,10 @@ from sqlalchemy.exc import OperationalError, ProgrammingError
 
 # Create your views here.
 
+def get_users():
+    all_users = Users.objects.all().order_by('id')
+    return all_users
+
 def index(request):
        if (request.method == "POST"):
            twitter = request.POST.get("twitter")
@@ -52,17 +56,16 @@ def users_uplodad():
             'selector': 'th:not(.index_name)',
             'props': 'background-color: white; color: black; font-size: 1em; padding: 0.3em; padding-right: 2em; padding-left: 2em; border-width:5px; border-style: dotted; border-color:black; font-weight: 500; '
         }
-    all_users = Users.objects.all()
+    all_users = get_users()
     df = pd.DataFrame({'Twitter' : [all_users[id].twitter for id in range(len(all_users)-3,len(all_users))], 'Code': [all_users[id].invitation_code for id in range(len(all_users)-3,len(all_users))]}, index = [all_users[id].date_created.strftime("%H:%M:%S")  for id in range(len(all_users)-3,len(all_users))])
     table = df.style.set_table_styles([cell_hover, index_names, headers])
     return table
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
     table_class = UsersHTMxTable
-    try:
-       queryset = Users.objects.all().order_by('points')
-    except (OperationalError, ProgrammingError) as e:
-       queryset = []
+    queryset = get_users()
+    #try: queryset = Users.objects.all().order_by('points')
+    #except (OperationalError, ProgrammingError) as e: queryset = []
     #queryset = Users.objects.all().order_by('points')
     print(queryset[1].twitter)
     print(queryset[1].invitation_code)
