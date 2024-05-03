@@ -21,6 +21,8 @@ from restaurant_review.filters import UsersFilter
 from django.views import View
 from django.http import HttpResponse
 
+from sqlalchemy.exc import OperationalError, ProgrammingError
+
 # Create your views here.
 
 def index(request):
