@@ -28,8 +28,8 @@ def index(request):
            twitter = request.POST.get("twitter")
            email = request.POST.get("email")
            ordinals_address = request.POST.get("ordinals_address")
-           #user_info = Users(twitter = twitter,email = email,ordinals_address = ordinals_address, points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False)
-           #user_info.save()
+           user_info = Users(twitter = twitter,email = email,ordinals_address = ordinals_address, points = 50, ref_status= False, date_created = datetime.now(), date_updated = datetime.now(), tweet_link = '', wl = False, fcfs = False, invitation_code = 'Public')
+           user_info.save()
            table = users_uplodad()
            return render(request, "restaurant_review/results.html", {'pandas_table': table.to_html()})
        else:
@@ -50,19 +50,15 @@ def users_uplodad():
             'selector': 'th:not(.index_name)',
             'props': 'background-color: white; color: black; font-size: 1em; padding: 0.3em; padding-right: 2em; padding-left: 2em; border-width:5px; border-style: dotted; border-color:black; font-weight: 500; '
         }
-    #all_users = Users.objects.all()
-    #df = pd.DataFrame({'Twitter' : [all_users[id].twitter for id in range(len(all_users)-3,len(all_users))], 'Points': [all_users[id].points for id in range(len(all_users)-3,len(all_users))]}, index = [all_users[id].date_created.strftime("%H:%M:%S")  for id in range(len(all_users)-3,len(all_users))])
-    #table = df.style.set_table_styles([cell_hover, index_names, headers])
-    table = []
+    all_users = Users.objects.all()
+    df = pd.DataFrame({'Twitter' : [all_users[id].twitter for id in range(len(all_users)-3,len(all_users))], 'Points': [all_users[id].points for id in range(len(all_users)-3,len(all_users))]}, index = [all_users[id].date_created.strftime("%H:%M:%S")  for id in range(len(all_users)-3,len(all_users))])
+    table = df.style.set_table_styles([cell_hover, index_names, headers])
     return table
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
     table_class = UsersHTMxTable
-    print(table_class)
-    #queryset = Users.objects.all().order_by('points')
-    #print(queryset)
+    queryset = Users.objects.all().order_by('points')
     filterset_class = UsersFilter
-    print(filterset_class)
     paginate_by = 15
     template_name = "restaurant_review/users_table_htmx.html"
 
