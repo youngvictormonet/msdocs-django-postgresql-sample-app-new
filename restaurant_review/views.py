@@ -57,7 +57,11 @@ def users_uplodad():
 
 class UsersHTMxTableView(SingleTableMixin, FilterView):
     table_class = UsersHTMxTable
-    queryset = Users.objects.all().order_by('points')
+    try:
+       queryset = Users.objects.all().order_by('points')
+    except (OperationalError, ProgrammingError) as e:
+       queryset = []
+    #queryset = Users.objects.all().order_by('points')
     #print(queryset)
     filterset_class = UsersFilter
     paginate_by = 15
