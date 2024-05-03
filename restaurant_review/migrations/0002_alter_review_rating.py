@@ -21,4 +21,9 @@ class Migration(migrations.Migration):
                 ]
             ),
         ),
+        migrations.AddField (
+            model_name="users",
+            name="invitation_code",
+            field=models.CharField(max_length=250)
+        ),
     ]
