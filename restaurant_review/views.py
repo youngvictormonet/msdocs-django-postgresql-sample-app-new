@@ -26,7 +26,7 @@ from sqlalchemy.exc import OperationalError, ProgrammingError
 # Create your views here.
 
 def get_users():
-    all_users = Users.objects.in_bulk().order_by('id')
+    all_users = Users.objects.all().order_by('id')
     return all_users
 
 def index(request):
