@@ -7,7 +7,7 @@ django-tables2==2.7.0
 pandas==2.2.1
 django-filter==24.2
 django-htmx==1.17.3
-django-crispy-forms==2.1
+django-crispy-forms==2.2
 crispy-bootstrap5==2024.2
 django-debug-toolbar==4.3.0
 django-bootstrap3 == 24.2
