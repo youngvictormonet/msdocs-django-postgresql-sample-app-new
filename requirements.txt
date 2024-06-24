@@ -11,4 +11,4 @@ django-crispy-forms==2.1
 crispy-bootstrap5==2024.2
 django-debug-toolbar==4.3.0
 django-bootstrap3 == 24.2
-sqlalchemy == 2.0.29
+sqlalchemy == 2.0.31
